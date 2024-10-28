@@ -132,5 +132,5 @@ class Problem:
         # heuristic method that computes the minimum manhattan distance
         # from pacman position to every remaining dot.
         if state[1] == []: return 0
-        # Complete your code here
+        state = ((4,2), [(1,1), (1,6), (6,1), (6,6)])
         
