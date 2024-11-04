@@ -33,7 +33,7 @@ class pacmanGraphic(Window):
                             width=0.1))
             
     def addText(self, x, y, str, color='blue'):
-        x, y = gCoord(x, y)
+        x, y = gCoord(x, y) # type: ignore
         return self.text(x, y, str, color)
     
     def setup(self, p):
@@ -75,8 +75,7 @@ class pacmanGraphic(Window):
         self.refresh()
         self.wait(0.1)
 
-        return x1, y1
-        
+        return x1, y1   
 
     def runPlan(self, p, plan):
         x1, y1 = p.pacman
@@ -85,5 +84,4 @@ class pacmanGraphic(Window):
             count += 1
             x1, y1 = self.move_pacman (p, (x1, y1), action)
 
-        print('count=', count)
-
+        print('count:', count)

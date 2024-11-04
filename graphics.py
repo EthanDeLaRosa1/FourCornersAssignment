@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import Tk, Label, Button
 import time
 class Window:
     def __init__ (self, w=700, h=700):
@@ -8,7 +9,8 @@ class Window:
         self.canvas.pack()
         self.refresh()
         
-
+        
+    
     def arc(self, x1, y1, x2, y2, startAngle, endAngle, outline, fill, width):
         return self.canvas.create_arc(x1, y1, x2, y2,
                                start=startAngle, extent=endAngle,
@@ -35,3 +37,7 @@ class Window:
         self.canvas.update()
     def wait(self, t):
         time.sleep(t)
+
+if __name__ == "__main__":
+    window = Window()  # Assuming you've created an instance of your Window class
+    window.root.mainloop()  # Start the Tkinter event loop

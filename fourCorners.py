@@ -4,7 +4,6 @@ import time
 from itertools import combinations
 from problemGraphics import pacmanGraphic
 import heapq
-import time
 
 def construct_path(node, visited):
     path = []
@@ -82,7 +81,7 @@ def AStar (p):
         # Add node to visited
         visited[(node[0], food)] = (parent, action)
         # check if the node is a goal node
-
+        
         if p.isGoal(node):
             print ('A* number of nodes explored: ', count)
             # return total cost and path
@@ -101,23 +100,30 @@ def AStar (p):
         # to the priority queue
         for step_cost, neighbor, a in neighbors:
             f = gCost + step_cost + p.h(neighbor)
-            # Add nodes to priority queue
-            newState= (f, gCost+step_cost, neighbor, node, a)
-            # complete one line of code here
-            # insert newState to the priority queue pq
+            newState = (f, gCost + step_cost, neighbor, node, a)
+            heapq.heappush(pq, newState)  # Insert newState into the priority queue
             
     return None, None
+    
 
-filename = 'tinyCorners.txt'
+filename = 'smallSearch.txt'
 
 # Complete your code here:
 # Get an instance of the problem:
 p = Problem(filename)
 p.compute_distances()
-cost , plan = AStar(p)
-pac = pacmanGraphic(1300, 700)  # Create an instance of the graphics
-pac.setup(p)  # Set up the graphical representation of the maze
-pac.runPlan(p, plan)  # Execute the plan returned by the A* search
+pac = pacmanGraphic(1300, 700)  # Initialize graphics
+pac.setup(p)  # Set up graphical maze
+cost, plan = AStar(p)  # Run A* and get both cost and plan
+pac.runPlan(p, plan)
+print("TESTING-TESTING")
+print("-----------------")
+
+
+
+
+
+
 
 
 # -------------------------------------------------------
@@ -127,17 +133,19 @@ pac.runPlan(p, plan)  # Execute the plan returned by the A* search
 
  
 # record start time
+p = Problem(filename)
 startTime = time.time()
 plan = bfs(p)
 endTime = time.time()
 print (plan)
 print ('plan length:', len(plan))
 print ('Time: ', (endTime - startTime) * 10**3, "ms")
-print ('------------------------')
+
 
 pac = pacmanGraphic(1300, 700)
 pac.setup(p)
 pac.runPlan(p, plan)
+#mainloop()
 
 # -------------------------------------------------------
 # UCS:
@@ -145,42 +153,49 @@ pac.runPlan(p, plan)
 
 p = Problem(filename)
 startTime = time.time()
+print ('------------------------')
 p.compute_distances()
 cost, plan = ucs(p)
 endTime = time.time()
 print('cost: ', cost)
 print(plan)
-print('plan length=', len(plan))
+print('plan length:', len(plan))
 print ('Time: ', (endTime - startTime) * 10**3, "ms")
-
 pac = pacmanGraphic(1300, 700)
 pac.setup(p)
 pac.runPlan(p, plan)
-
 # -------------------------------------------------------
 # A*
 # -------------------------------------------------------
 
-# Complete one line of code here:
-# get an instance of the Problem passing
-#    in the file name
+print ('------------------------')
+p = Problem(filename)
 
 startTime = time.time()
 # Complete two lines of code here
-# 1) call compute distances method in FourCornersProblem
+p.compute_distances
 
-# 2) Call Astar passing in the instance of the Problem,
+# 2) Call Astar passing in the instance of the Problem, type ignore
 #    it returns the cost and the plan similar to ucs
+p = Problem(filename)
+p.compute_distances()
+pac = pacmanGraphic(1300, 700)  # Initialize graphics
+pac.setup(p)  # Set up graphical maze
 
+# A* Search
+# Run A* and get both cost and plan
+cost, plan = AStar(p)  # Run A* and get both cost and plan
+pac.runPlan(p, plan)
 endTime = time.time()
 print ('Time: ', (endTime - startTime) * 10**3, "ms")
 # 3) print the cost, the plan and the plan length
-print('cost=', cost)
+print('cost:', cost)
 print(plan)
-print('plan length=', len(plan))
+print('plan length:', len(plan))
 
 # Leave this code for plan execute and
 # moves pacman to collect the dots.
 pac = pacmanGraphic(1300, 700)
 pac.setup(p)
 pac.runPlan(p, plan)
+

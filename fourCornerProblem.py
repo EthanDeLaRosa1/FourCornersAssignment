@@ -129,6 +129,7 @@ class Problem:
         return neighbors 
 
     def h(self, state):
+        state = ((4,2), [(1,1), (1,6), (6,1),(6,6)])
         # If there are no remaining dots, the heuristic is 0
         if not state[1]:
             return 0
