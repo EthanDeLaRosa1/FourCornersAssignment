@@ -129,8 +129,15 @@ class Problem:
         return neighbors 
 
     def h(self, state):
-        # heuristic method that computes the minimum manhattan distance
-        # from pacman position to every remaining dot.
-        if state[1] == []: return 0
-        state = ((4,2), [(1,1), (1,6), (6,1), (6,6)])
+        # If there are no remaining dots, the heuristic is 0
+        if not state[1]:
+            return 0
         
+        pacman_pos = state[0]  # Current position of Pacman
+        remaining_dots = state[1]  # Remaining food dots
+
+        # Calculate the minimum Manhattan distance to the closest food dot
+        min_distance = min(abs(pacman_pos[0] - dot[0]) + abs(pacman_pos[1] - dot[1]) for dot in remaining_dots)
+
+        return min_distance  # Return the calculated heuristic value
+

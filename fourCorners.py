@@ -93,6 +93,7 @@ def AStar (p):
 
         # Complete one line of code here
         # get next states or neighbor states by calling nextState
+        neighbors = p.nextStates(node)
         # from the FourCornerProblem passing in the node.
         
         
@@ -111,10 +112,16 @@ filename = 'tinyCorners.txt'
 
 # Complete your code here:
 # Get an instance of the problem:
+p = Problem(filename)
+p.compute_distances()
+cost , plan = AStar(p)
+pac = pacmanGraphic(1300, 700)  # Create an instance of the graphics
+pac.setup(p)  # Set up the graphical representation of the maze
+pac.runPlan(p, plan)  # Execute the plan returned by the A* search
 
 
 # -------------------------------------------------------
-# BFS:
+# BFS: 
 # -------------------------------------------------------
 
 
